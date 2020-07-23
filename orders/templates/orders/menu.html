@@ -1,0 +1,75 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Menu
+{% endblock %}
+
+{% block body %}
+<h1>Menu page</h1>
+{% load staticfiles %}
+
+<div  id="text1" class="container">
+  <p class="text-center"></p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      </div>
+
+    <div class="col-8">
+      <div class="container">
+        <div id="Textarea1">
+          {% for c in cats %}
+          <h2 id={{c}}>{{ c }} </h2>
+          {% for item in items %}
+          {% if item.cat == c %}
+            {% if item.pricelarge %}
+            <h4>{{item.item}}<button type="button" name="button" style="margin:5px;"class="btn btn-dark">{{item.price}}</button><button type="button" name="button" class="btn btn-dark">{{item.pricelarge}}</button></h4>
+            {% else %}
+            <h4>{{item.item}}<button type="button" name="button" style="margin:5px;"class="btn btn-dark">{{item.price}}</button></h4>
+            {% endif %}
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+
+          {% for extra in extras %}
+          <h4>{{ extra.topping }}</h4>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="container">
+        <h2>Cart</h2>
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="input" class="form-control" name="username" id="username" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control"  name="password" id="password">
+            <small id="passwordnomatch" class="form-text text-danger">{{message}}</small>
+          </div>
+          <div class="form-group">
+            <button id="login" type="submit" style="width:65%;" class="btn btn-dark">Log in</button>
+          </div>
+          </form>
+        <form action="{% url 'registration' %}" method="post">
+          {% csrf_token %}
+        <div class="form-group">
+          <button id="register" type="submit" style="width:65%;" class="btn btn-dark">Register</button>
+          <small id="registerHelp" class="form-text text-muted">New customer ? Click here to register</small>
+        </div>
+      </form>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+{% endblock %}

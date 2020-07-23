@@ -1,0 +1,77 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Order
+{% endblock %}
+
+{% block body %}
+<h1>Order page</h1>
+{% load staticfiles %}
+
+<div  id="text1" class="container">
+  <p class="text-center"></p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      {% for c in cats %}
+      
+      {% endfor %}
+      </div>
+    <div class="col-8">
+      <div class="container">
+        <div class ="chatbox" id="Textarea1">
+          {% for c in cats %}
+          <h2>{{ c }}</h2>
+          {% for item in items %}
+          {% if item.cat == c %}
+            {% if item.pricelarge %}
+            <h4>{{item.item}}<a href="{% url 'cart' item.id %}" style="margin:5px;" class="btn btn-dark">{{item.price}}</a><a href="{% url 'large' item.id %}" class="btn btn-dark">{{item.pricelarge}}</a></h4>
+          <!--<h4>{{item.item}}<button type="button" name="button" onclick="test(this)" style="margin:5px;"class="btn btn-dark">{{item.price}}</button><button type="button" name="button" class="btn btn-dark">{{item.pricelarge}}</button></h4>-->
+            {% else %}
+            <h4>{{item.item}}<a href="{% url 'cart' item.id %}" method="post" style="margin:5px;" class="btn btn-dark">{{item.price}}</a></h4>
+            <!--<h4>{{item.item}}<button type="button" name="button" id="{{item.item}}" onclick="{% url 'cart' item.id %}" style="margin:5px;"class="btn btn-dark">{{item.price}}<button></h4>-->
+            {% endif %}
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+
+          {% for extra in extras %}
+          <h4>{{ extra.topping }}</h4>
+          {% endfor %}
+
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="container">
+        <h2>Cart</h2>
+        <form  action="{% url 'remove' %}" method="post">
+        {% csrf_token %}
+        {% for i in cart %}
+        <p>{% if i.size %}{{i.size}}{% endif %} {{i.item}} <br> ${{i.price}}<button name="remove" type="submit" style="margin:5px;" class="del" value="{{i.pk}}">X</button></p>
+        {% for topping in i.toppings.all %}
+              {% if topping.price > 0%}
+              <p><small> + {{ topping }}</small></p>
+              {% else %}
+              <p><small> + {{ topping.topping }}</small></p>
+              {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </form>
+        <p> Cart Total </p>
+        <p>  $ {{total}}</p>
+          <a href="{% url 'confirm' %}" class="btn btn-dark"style="margin:5px;">Place order</a>
+          <a href="{% url 'logout' %}"class="btn btn-dark" style="margin:5px;">logout</a>
+
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+{% endblock %}

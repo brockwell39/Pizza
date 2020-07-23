@@ -1,0 +1,73 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+
+{% block scripts %}
+<script src="{% static 'orders/confirm.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+Confirm
+{% endblock %}
+
+{% block body %}
+<h1>Confirmation page</h1>
+{% load staticfiles %}
+
+<div  id="text1" class="container">
+  <p class="text-center"></p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="container">
+        <div class ="chatbox" id="Textarea1">
+          <h2>Cart</h2>
+          <h1>{{ message }}</h1>
+          <form  action="{% url 'confirmremove' %}" method="post">
+          {% csrf_token %}
+          {% for i in cart %}
+          <p>{% if i.size %}{{i.size}}{% endif %} {{i.item}} ${{i.price}}<button name="remove" type="submit" style="margin:5px;" class="del" value="{{i.pk}}">X</button></p>
+          {% for topping in i.toppings.all %}
+                {% if topping.price > 0 %}
+                <p><small> + {{ topping }}</small></p>
+                {% else %}
+                <p><small> + {{ topping.topping }}</small></p>
+                {% endif %}
+              {% endfor %}
+          {% endfor %}
+          </form>
+          <p> Cart Total </p>
+          <p>$ {{total}}</p>
+
+            <form id="timeform" class="" action="{% url 'placed' %}" method="post">
+              {% csrf_token %}
+              <p> Order requested: </p>
+              <div class="form-check">
+                <small id="asaptime" class="form-text text-danger"></small>
+                <label for="vehicle1">ASAP</label>
+              <input type="checkbox" id="asap" name="asap" value="asap">
+              </div>
+              <label for="time">Or select a time:</label>
+              <input type="time" id="time" name="time" min="11:00" max="23:00">
+              <br>
+              <label for="vehicle1">Pay online ?</label>
+              <input type="checkbox" id="online" name="online" value="online">
+              <br>
+            <a href="{% url 'order' %}" class="btn btn-dark">Back to menu</a>
+            <button id="confirm" type="submit" style="margin:5px;" class="btn btn-dark" value="">Confirm Order</button>
+            </form>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="container">
+
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+{% endblock %}

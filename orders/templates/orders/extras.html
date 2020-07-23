@@ -1,0 +1,65 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Extras
+{% endblock %}
+
+{% block body %}
+<h1>Extras page ?</h1>
+{% load staticfiles %}
+
+<div  id="text1" class="container">
+  <p class="text-center"></p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      </div>
+    <div class="col-8">
+      <div class="container">
+        <div class ="chatbox" id="Textarea1">
+          <h4>{{ message }}</h4>
+          <form action="{% url 'extras' %}" method="post">
+            {% csrf_token %}
+            {% for x in extras %}
+            {% if x.price > 0 %}
+            <h4>{{x.topping}}<button name="topping" type="submit" style="margin:5px;" class="btn btn-dark" value="{{x.id}}">{{x.price}}</button>
+            {% else %}
+            <h4><button name="topping" type="submit" style="margin:5px;" class="btn btn-dark" value="{{x.id}}">{{x.topping}}</button>
+            {% endif %}
+            {% endfor %}
+            <p><a href="{% url 'order' %}" style="margin:5px;" class="btn btn-dark">No More Extras</a></p>
+          </form>
+</div>
+
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="container">
+        <h2>Cart</h2>
+        <form  action="{% url 'remove' %}" method="post">
+        {% csrf_token %}
+        {% for i in cart %}
+        <p>{% if i.size %}{{i.size}}{% endif %} {{i.item}} <br> ${{i.price}}<button name="remove" type="submit" style="margin:5px;" class="del" value="{{i.pk}}">X</button></p>
+        {% for topping in i.toppings.all %}
+              {% if topping.price > 0%}
+              <p><small> + {{ topping }}</small></p>
+              {% else %}
+              <p><small> + {{ topping.topping }}</small></p>
+              {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </form>
+        <p> Cart Total </p>
+        <p>  $ {{total}}</p>
+          <a href="{% url 'confirm' %}" class="btn btn-dark" style="margin:5px;">Place order</a>
+          <a href="{% url 'logout' %}"class="btn btn-dark"style="margin:5px;">logout</a>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+{% endblock %}

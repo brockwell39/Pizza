@@ -1,0 +1,17 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Menu
+{% endblock %}
+
+{% block body %}
+<h1>Menu page</h1>
+{% load staticfiles %}
+
+<h1>Logged In</h1>
+<a href="{% url 'logout' %}">logout</a>
+
+
+{% endblock %}

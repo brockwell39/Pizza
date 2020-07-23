@@ -1,0 +1,44 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Info
+{% endblock %}
+
+{% block body %}
+<h1>Info</h1>
+{% load staticfiles %}
+
+
+<div id="text1" class="container">
+  <h2 class="text-center">Contact details</h2>
+  <p class="text-center">Our phone numbers are 617-876-4897 or 617-876-0012</p>
+  <p class="text-center">Our fax number is 617-661-6188</p>
+  <p class="text-center">Find us on Twitter @PinocchiosPizz</p>
+  <p class="text-center">And Instagram @pinocchiospizza1</p>
+  <p class="text-center">If you have any questions or comments or would like to get on our email list you can email us at pinocchiospizza1@gmail.com</p>
+  <h4 class="text-center">Pinocchio's Pizza, 74 Winthrop Street, Cambridge, MA 02138</h4>
+  <hr>
+  <h2 class="text-center">Hours</h2>
+
+
+
+  <p class="text-center">Sunday	1 pm - 12 midnight</p>
+  <p class="text-center">Monday - Thursday	11 am - 1 am</p>
+  <p class="text-center">Friday - Saturday	11 am - 2:30 am*</p>
+  <h4 class="text-center">**** Important note March 17th, 2020--- we will be closing every night at 11:00 pm until further notice.****
+</h4>
+  <hr>
+  <h2 margin-bottom ='30px' class="text-center">Oh, and always remember:</h2>
+
+<h1 class="text-center">Eat More Pizza!</h1>
+  <div class="text-center">
+  <div class="text-center">
+  <img src="{% static "orders/pinocchio's.jpg" %}"class="rounded" alt="Pinocchio's">
+  </div>
+
+</div>
+
+
+{% endblock %}

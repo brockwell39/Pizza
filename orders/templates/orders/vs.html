@@ -1,0 +1,36 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Sicilian vs. Regular
+{% endblock %}
+
+{% block body %}
+<h1><span id=a>Sicilian</span><span id =pi> vs.</span><span id=pl> Regular</span></h1>
+{% load staticfiles %}
+
+
+<div id="text1" class="container">
+  <h2 class="text-center">Sicilian Pizza</h2>
+  <p class="text-center">Our Sicilian pizza is a deep-dish or thick-crust pizza. We sell them in a 9-slice or a 15-slice size.</p>
+  <p class="text-center">The 9-slice size is 16" x 16" and will feed anywhere from 3 to 5 people.</p>
+  <p class="text-center">The 15-slice size is 28" x 16", comes in 2 large pizza boxes and can feed 6 to 9 people.</p>
+  <h2 class="text-center">Regular Pizza</h2>
+  <p class="text-center">Our Regular pizza is a thin-crust or Neapolitan pizza. They come in 2 sizes: small (12" in diameter) and large (16" in diameter). The small is suitable for 1 to 2 people while the large feeds 2 to 4 people.
+ </p>
+   <hr>
+  <h4 class="text-center">We can make any of our pizzas in about 10 to 15 minutes, and they can be eaten in our dining room or taken out.</h4>
+  <hr>
+  <h2 margin-bottom ='30px' class="text-center">Oh, and always remember:</h2>
+
+<h1 class="text-center">Eat More Pizza!</h1>
+<h1><span id=a>Eat</span><span id =pi> More</span><span id=pl> Pizza!</span></h1>
+  <div class="text-center">
+  <div class="text-center">
+  </div>
+
+</div>
+
+
+{% endblock %}

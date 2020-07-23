@@ -1,0 +1,44 @@
+{% extends "orders/base.html" %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'orders/pizza.js' %}"></script>
+
+{% block title %}
+Extras
+{% endblock %}
+
+{% block body %}
+<h1>Extras page ?</h1>
+{% load staticfiles %}
+
+<div  id="text1" class="container">
+  <p class="text-center"></p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      </div>
+    <div class="col-8">
+      <div class="container">
+        <div class ="chatbox" id="Textarea1">
+          <h4>{{ message }}</h4>
+          <form action="{% url 'extras' %}" method="post">
+            {% csrf_token %}
+            {% for x in extras %}
+            {% if x.price > 0 %}
+            <h4>{{x.topping}}<button name="topping" type="submit" style="margin:5px;" class="btn btn-dark" value="{{x.id}}">{{x.price}}</button>
+            {% else %}
+            <h4><button name="topping" type="submit" style="margin:5px;" class="btn btn-dark" value="{{x.id}}">{{x.topping}}</button>
+            {% endif %}
+            {% endfor %}
+            <p><a href="{% url 'order' %}" style="margin:5px;" class="btn btn-dark">No More Extras</a></p>
+          </form>
+</div>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+
+{% endblock %}
